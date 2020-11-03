@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ru">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no">
+      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+      <title>{{.Title}}</title>
+      <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+      <link rel="stylesheet" href="/css/normalize.min.css" />
+      <link rel="stylesheet" href="/css/swiper.min.css" />
+      <link rel="stylesheet" href="/css/swiper_init.css" />
+      <!-- v1 - CDN -->
+      <!--
+         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald%7CLato:400italic,400,700">
+         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+         <link rel="stylesheet" href="css/fonts_noOswald_noLato.css" />
+         -->
+      <!-- /v1 -->
+      <!-- v2 - local -->
+      <link rel="stylesheet" href="/css/fonts.css" />
+      <!-- /v2 -->
+      <link rel="stylesheet" href="/css/style.css" />
+   </head>
+   <body class="loggedin">
+      <header id="header" class="header">
+         <address class="contact-info hidden-md hidden-sm">
+            <div class="icon-block"><a href="tel:8-800-700-1153"><span class="icon icon-xs icon-circle icon-gray-lighter mdi mdi-phone color-primary"></span></a></div>
+            <div class="info-block"><a href="tel:8-800-700-1153">8-800-700-1153</a></div>
+         </address>
+         <button id="topmenu-header-toggle" class="topmenu-header-toggle hidden-xlg"><span></span></button>
+         <div class="hidden-md hidden-sm"><a href="/"><img class="img-responsive" src="/images/logo.png" alt="Sakwa.RU - магазин профессиональной косметики" /></a></div>
+         <div class="hidden-xlg"><a href="/"><img class="img-responsive" src="/images/logo.png" width="175" height="70" alt="Sakwa.RU - магазин профессиональной косметики" /></a></div>
+         <address class="contact-info hidden-md hidden-sm right">
+            <div class="icon-block"><a href="account.html"><span class="icon icon-xs icon-circle icon-gray-lighter mdi mdi-account color-primary"></span></a></div>
+            <div class="info-block"><a href="account.html">Светлана</a><br />1000 бонусов | <a href="#" class="logout">Выйти</a></div>
+         </address>
+         <div class="header-right-buttons hidden-xlg">
+            <button class="cart-button-mobile"><i class="material-icons">shopping_cart</i></button>
+            <button id="rightmenu-header-toggle" class="rightmenu-header-toggle"><span></span></button>
+            <div id="rightmenu" class="rightmenu">
+               <address class="contact-info">
+                  <div class="icon-block"><a href="tel:8-800-700-1153"><span class="icon icon-xs icon-circle icon-gray-lighter mdi mdi-phone color-primary"></span></a></div>
+                  <div class="info-block"><a href="tel:8-800-700-1153">8-800-700-1153</a></div>
+               </address>
+               <address class="contact-info">
+                  <div class="icon-block"><a href="account.html"><span class="icon icon-xs icon-circle icon-gray-lighter mdi mdi-account color-primary"></span></a></div>
+                  <div class="info-block"><a href="account.html">Светлана</a><br />1000 бонусов</div>
+               </address>
+               <address class="contact-info">
+                  <div class="icon-block"><a href="#"><span class="icon icon-xs icon-circle icon-gray-lighter mdi mdi-logout color-primary"></span></a></div>
+                  <div class="info-block"><a href="#">Выйти</a></div>
+               </address>
+            </div>
+         </div>
+      </header>
+      <nav id="topmenu-container" class="topmenu-container">
+         <div id="topmenu" class="topmenu">
+            <div class="search-mobile hidden-xlg">
+               <form class="search-form-mobile" action="search-results.html" method="GET">
+                  <div class="form-group">
+                     <label id="search-form-input-label-mobile" class="search-form-label" for="search-form-input-mobile">Поиск</label>
+                     <input id="search-form-input-mobile" class="search-form-input" type="text" name="s" autocomplete="off" />
+                  </div>
+                  <button class="search-form-submit" type="submit"><span class="fa fa-search"></span></button>
+               </form>
+            </div>
+            <div class="menu">
+               <ul>
+                  <li class="home active"><a href="/"><span><i class="material-icons">home</i></span></a></li>
+                  <li><a href="actions.html"><span>АКЦИИ</span></a></li>
+                  <li><a href="brands.html"><span>БРЕНДЫ</span></a></li>
+                  {{include "topbar"}}
+                  <li>
+                     <a href="#"><span>ИНФОРМАЦИЯ</span></a><span class="submenu-toggle"></span>
+                     <ul class="submenu-dropdown">
+                        <li><a href="services.html"><span>Сведения</span></a></li>
+                        <li><a href="masterclass-schedule.html"><span>Расписание мастер-классов</span></a></li>
+                        <li><a href="articles.html"><span>Статьи</span></a></li>
+                        <li><a href="contacts.html"><span>Контакты</span></a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </div>
+            <div class="search">
+               <a id="search-toggle" class="search-toggle mdi" href="#"><span></span></a>        
+               <form class="search-form" action="search-results.html" method="GET">
+                  <div class="form-group">
+                     <label id="search-form-input-label" class="search-form-label" for="search-form-input">Введите имя товара и нажмите <span>Enter</span>...</label>
+                     <input id="search-form-input" class="search-form-input" type="text" name="s" autocomplete="off" />
+                  </div>
+                  <div class="search-results-live cleared" id="search-results-live"></div>
+               </form>
+            </div>
+            <div class="cart">
+               <button class="cart-button">
+               <i class="material-icons">shopping_cart</i>
+               </button>
+               <div class="cart-panel displaynone">
+                  <h6>Корзина</h6>
+                  <div class="cart-panel-row">
+                     <span><img src="/images/sample_product_small_square.jpg"></span>
+                     Обесцвечивающая пудра с...
+                     <span class="count">1</span>
+                  </div>
+                  <div class="cart-panel-row">
+                     <span><img src="/images/sample_product_small_square.jpg"></span>
+                     Обесцвечивающая пудра с...
+                     <span class="count">1</span>
+                  </div>
+                  <div class="cart-panel-row">
+                     <span><img src="/images/sample_product_small_square.jpg"></span>
+                     Обесцвечивающая пудра с...
+                     <span class="count">1</span>
+                  </div>
+                  <div class="cart-panel-bottom">
+                     <a href="cart_new.html">Все товары в корзине</a>   
+                     <p>Итого:<span>1 407</span><span class="fa fa-rub"></span></p>
+                     <button class="cart-panel-button btn btn-small btn-primary">оформить заказ</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </nav>
+
+      <!-- Top slider -->
+      {{if .Sliders}}
+	      {{include "slider"}}
+      <!-- /Top slider -->
+      {{end}}
+
+      {{if .Breadcrumbs}}
+	      {{template "breadcrumbs" .}}
+      {{end}}
+
+      {{template "main" .}}
+
+      <!-- Brands -->
+      <section class="brands container hidden-sm">
+         <h3>Бренды</h3>
+         <hr class="color-secondary divider-custom" />
+         <div class="row">
+            <div class="col-md-12">
+               <div class="brand-carousel">
+                  <!-- Swiper 2 -->
+                  <div class="swiper-container">
+                     <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                        <div class="swiper-slide"><img src="../images/carousel/slider_img_01.png"></div>
+                     </div>
+                     <!--
+                        <div class="swiper-pagination"></div>
+                        -->
+                     <div class="swiper-button-next"></div>
+                     <div class="swiper-button-prev"></div>
+                  </div>
+                  <!-- /Swiper 2 -->
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- /Brands -->
+      <section class="payment-methods hidden-sm">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-2 textalignleft">
+                  <a href="payment_methods.html">Способы оплаты</a>
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/pay_method1.png">
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/pay_method2.png">
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/pay_method3.png">
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/pay_method4.png">
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/pay_method5.png">
+               </div>
+            </div>
+            <div class="row margintop50">
+               <div class="col-md-2 textalignleft">
+                  <a href="shiping_methods.html">Способы доставки</a>
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/delivery_method1.png">
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/delivery_method2.png">
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/delivery_method3.png">
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/delivery_method4.png">
+               </div>
+               <div class="col-md-2">
+                  <img src="../images/delivery_method5.png">
+               </div>
+            </div>
+         </div>
+      </section>
+      <footer>
+         <section class="footer container">
+            <div class="logo-block">
+               <a href="/">
+               <img class="img-responsive" src="/images/logo.png" alt="Sakwa.RU - магазин профессиональной косметики" />
+               </a>
+            </div>
+            <address class="contact-info hidden-xlg">
+               <div class="icon-block"><a href="tel:8-800-700-1153"><span class="icon icon-xs icon-circle icon-gray-lighter mdi mdi-phone color-primary"></span></a></div>
+               <div class="info-block"><a href="tel:8-800-700-1153">8-800-700-1153</a></div>
+            </address>
+            <ul class="foot-nav">
+               <li><a href="actions.html">Акции</a></li>
+               <li><a href="info.html">Информация</a></li>
+               <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+            <address class="contact-info hidden-sm hidden-md">
+               <div class="icon-block"><a href="tel:8-800-700-1153"><span class="icon icon-xs icon-circle icon-gray-lighter mdi mdi-phone color-primary"></span></a></div>
+               <div class="info-block"><a href="tel:8-800-700-1153">8-800-700-1153</a></div>
+            </address>
+            <ul class="social-icons">
+               <li><a class="icon fa fa-vk icon-xxs icon-circle icon-gray-light" target="_blank" href="https://vk.com/sakwa"></a></li>
+               <li><a class="icon fa fa-facebook icon-xxs icon-circle icon-gray-light" target="_blank" href="https://www.facebook.com/groups/sakwa1"></a></li>
+               <li><a class="icon fa fa-odnoklassniki icon-xxs icon-circle icon-gray-light" target="_blank" href="https://www.odnoklassniki.ru/sakwa.ru"></a></li>
+               <li><a class="icon fa fa-youtube icon-xxs icon-circle icon-gray-light" target="_blank" href="https://www.youtube.com/user/1sakwa"></a></li>
+               <li><a class="icon fa fa-instagram icon-xxs icon-circle icon-gray-light" target="_blank" href="https://www.instagram.com/sakwa.ru/"></a></li>
+            </ul>
+         </section>
+         <section class="address-list hidden-sm">
+            <div class="container">
+               <h3>Наши магазины</h3>
+               <hr class="color-secondary divider-custom" />
+               <div class="row">
+                  <!-- The shops -->
+                  <div class="col-md-3 foot-address-item">
+                     <h5>Офис и магазин</h5>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-map-marker color-primary"></span></div>
+                        <div class="info-block"><a href="contacts.html?shop=shop01">г.&nbsp;Барнаул,<br />ул.&nbsp;Малахова,&nbsp;89</a></div>
+                     </address>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-primary"></span></div>
+                        <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-721-001">(3852)&nbsp;721-001</a>,<br />сот.:&nbsp;<a href="tel:+7-906-965-5252">+7-906-965-5252</a></div>
+                     </address>
+                  </div>
+                  <div class="col-md-3 foot-address-item">
+                     <h5>ТРЦ Арена</h5>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-map-marker color-primary"></span></div>
+                        <div class="info-block"><a href="contacts.html?shop=shop02">г.&nbsp;Барнаул,<br />Павловский&nbsp;тр.,&nbsp;188, 1&nbsp;этаж</a></div>
+                     </address>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-primary"></span></div>
+                        <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-25-43-01">(3852)&nbsp;25-43-01</a>,<br />сот.:&nbsp;<a href="tel:+7-903-947-9301">+7-903-947-9301</a></div>
+                     </address>
+                  </div>
+                  <div class="col-md-3 foot-address-item">
+                     <h5>ТРЦ Галактика</h5>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-map-marker color-primary"></span></div>
+                        <div class="info-block"><a href="contacts.html?shop=shop03">г.&nbsp;Барнаул,<br />пр.&nbsp;Строителей,&nbsp;117, 1&nbsp;этаж</a></div>
+                     </address>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-primary"></span></div>
+                        <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-53-49-84">(3852)&nbsp;53-49-84</a>,<br />сот.:&nbsp;<a href="tel:+7-964-603-4984">+7-964-603-4984</a></div>
+                     </address>
+                  </div>
+                  <div class="col-md-3 foot-address-item">
+                     <h5>ТРЦ Европа</h5>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-map-marker color-primary"></span></div>
+                        <div class="info-block"><a href="contacts.html?shop=shop04">г.&nbsp;Барнаул,<br />Павловский&nbsp;тр.,&nbsp;251-в, 1&nbsp;этаж</a></div>
+                     </address>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-primary"></span></div>
+                        <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-25-44-92">(3852)&nbsp;25-44-92</a>,<br />сот.:&nbsp;<a href="tel:+7-903-947-9492">+7-903-947-9492</a></div>
+                     </address>
+                  </div>
+                  <div class="col-md-3 foot-address-item">
+                     <h5>ТРЦ Пионер</h5>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-map-marker color-primary"></span></div>
+                        <div class="info-block"><a href="contacts.html?shop=shop05">г.&nbsp;Барнаул,<br />пр.&nbsp;Ленина,&nbsp;102в, 2&nbsp;этаж</a></div>
+                     </address>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-primary"></span></div>
+                        <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-69-44-94">(3852)&nbsp;69-44-94</a>,<br />сот.:&nbsp;<a href="tel:+7-902-998-4494">+7-902-998-4494</a></div>
+                     </address>
+                  </div>
+                  <div class="col-md-3 foot-address-item">
+                     <h5>ТЦ Мария Ра</h5>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-map-marker color-primary"></span></div>
+                        <div class="info-block"><a href="contacts.html?shop=shop06">г.&nbsp;Барнаул,<br />ул.&nbsp;Балтийская,&nbsp;116</a></div>
+                     </address>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-primary"></span></div>
+                        <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-25-20-28">(3852)&nbsp;25-20-28</a>,<br />сот.:&nbsp;<a href="tel:+7-903-947-7028">+7-903-947-7028</a></div>
+                     </address>
+                  </div>
+                  <div class="col-md-3 foot-address-item">
+                     <h5>ТЦ Парк</h5>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-map-marker color-primary"></span></div>
+                        <div class="info-block"><a href="contacts.html?shop=shop07">г.&nbsp;Новоалтайск,<br />ул.&nbsp;Деповская,&nbsp;22, 2&nbsp;этаж</a></div>
+                     </address>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-primary"></span></div>
+                        <div class="info-block">сот.:&nbsp;<a href="tel:+7-960-965-6706">+7-960-965-6706</a></div>
+                     </address>
+                  </div>
+                  <div class="col-md-3 foot-address-item">
+                     <h5>Sakwa Бийск</h5>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-map-marker color-primary"></span></div>
+                        <div class="info-block"><a href="contacts.html?shop=shop08">г.&nbsp;Бийск,<br />ул.&nbsp;Васильева,&nbsp;1а, 2&nbsp;этаж</a></div>
+                     </address>
+                     <address class="contact-info">
+                        <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-primary"></span></div>
+                        <div class="info-block">тел.:&nbsp;<a href="tel:8-3854-222-223">(3854)&nbsp;222-223</a></div>
+                     </address>
+                  </div>
+                  <!-- /The shops -->
+               </div>
+            </div>
+         </section>
+         <section class="copyright">
+            <div class="container">
+               &copy; 2006-2020 <a href="/">Sakwa.RU</a>
+            </div>
+         </section>
+      </footer>
+      <a href="#" id="to-top-button" class="to-top-button icon icon-xs icon-circle icon-darker-filled mdi mdi-chevron-up" onclick="smoothJumpUp(); return false;"></a>
+      <div class="modal-wrap displaynone">
+         <div class="modal fast-login">
+            <div class="col-md-auto">
+               <div class="row">
+                  <span>Войти с помощью</span>
+                  <ul class="social-icons">
+                     <li><a class="icon fa fa-vk icon-xxxs icon-circle icon-gray-light" target="_blank" href="https://vk.com/sakwa"></a></li>
+                     <li><a class="icon fa fa-facebook icon-xxxs icon-circle icon-gray-light" target="_blank" href="https://www.facebook.com/groups/sakwa1"></a></li>
+                     <li><a class="icon fa fa-odnoklassniki icon-xxxs icon-circle icon-gray-light" target="_blank" href="https://www.odnoklassniki.ru/sakwa.ru"></a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="col-md-auto">
+               <div class="row">
+                  <span>или</span>
+                  <form><input type="text" name="phone" class="form-control" placeholder="по номеру телефона" /></form>
+               </div>
+            </div>
+            <div class="col-md-auto">
+               <div class="row">
+                  <a href="sign-up.html">Регистрация</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="/js/swiper.min.js"></script>
+      <script src="/js/swiper_init.js"></script>
+      <script src="/js/script.js"></script>
+   </body>
+</html>
+

@@ -1,0 +1,68 @@
+{{define "main"}}
+
+      <main class="container">
+         <!--
+            <section class="banners">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="images/action_1_3.jpg">
+                </div>
+                <div class="col-md-6">
+                  <img src="images/action_1_3.jpg">
+                </div>
+              </div>
+            </section>
+            -->
+         <section class="tabs tabs-3" id="tabs">
+            <div class="tab">
+               <input type="radio" name="link" id="sp1" checked="checked" />
+               <label for="sp1">Хиты</label>
+               <div class="tab-content">
+                  <div class="row">
+                     <!-- The goods - hits -->
+		     {{range .HitProducts}}
+			{{template "productsmall" .}}
+		     {{end}}
+                     <!-- /The goods - hits -->
+                  </div>
+                  <div class="view_more displaynone">
+                     <a href="#">Показать все хиты...</a>
+                  </div>
+               </div>
+            </div>
+            <div class="tab">
+               <input type="radio" name="link" id="sp2" />
+               <label for="sp2">Новинки</label>
+               <div class="tab-content">
+                  <div class="row">
+                     <!-- The goods - new -->
+		     {{range .NewProducts}}
+			{{template "productsmall" .}}
+		     {{end}}
+                     <!-- /The goods - new -->
+                  </div>
+                  <div class="view_more">
+                     <a href="#">Показать все новинки...</a>
+                  </div>
+               </div>
+            </div>
+            <div class="tab">
+               <input type="radio" name="link" id="sp3" />
+               <label for="sp3">Распродажа</label>
+               <div class="tab-content">
+                  <div class="row">
+                     <!-- The goods - sales -->
+		     {{range .SaleProducts}}
+			{{template "productsmall" .}}
+		     {{end}}
+                     <!-- /The goods - sales -->
+                  </div>
+                  <div class="view_more displaynone">
+                     <a href="#">Показать все распродажи...</a>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </main>
+
+{{end}}

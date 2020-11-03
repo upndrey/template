@@ -1,0 +1,11 @@
+/* tmp */
+
+.owl-carousel {
+	height: 45px;
+	overflow: hidden;
+}
+
+.owl-item {
+	display: inline-block;
+	width: 190px;
+}

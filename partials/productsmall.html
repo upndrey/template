@@ -1,0 +1,29 @@
+{{define "productsmall"}}
+                     <div class="tab-item-wrap">
+                        <a href="{{.Url}}" class="tab-item" data-product_id="{{.Id}}">
+                           <div class="item-title">
+                              {{.Name}}
+                           </div>
+                           <div class="item-image">
+                              <img src="{{.Image}}">
+                              <span class="labels">
+					{{if .IsHit}}<div class="label-star filled deg5">хит</div>{{end}}
+					{{if .IsNew}}<div class="label-star empty deg5">new</div>{{end}}
+                              </span>
+                           </div>
+                           <div class="item-price">
+                              <p>{{.Price}} ₽</p>
+                           </div>
+                           <button class="buy-button btn btn-small btn-primary" data-product_id="{{.Id}}">Купить</button>
+                           <div class="in-cart">
+                              <div class="items-number">0</div>
+                              <i class="material-icons">shopping_cart</i>
+                           </div>
+                           <div class="item-hover-block">
+                              <button class="fav-button btn btn-small btn-secondary" data-product_id="{{.Id}}"><span class="to-add-text">Добавить в избранное</span><span class="added-text">В избранном</span><span class="to-del-text">Убрать из избранного</span></button>
+                              <div class="in-fav"><i class="material-icons">favorite</i></div>
+                              <div class="item-description">{{.Description}}</div>
+                           </div>
+                        </a>
+                     </div>
+{{end}}

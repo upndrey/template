@@ -1,0 +1,23 @@
+{{range .Topbar}}
+<li class="has-megamenu">
+   <a href="{{.Url}}"><span>{{.Text}}</span></a><span class="submenu-toggle"></span>
+   <div class="submenu-megamenu">
+      <div class="row">
+         {{range .Items}}
+         <div class="menu-level-2 col-lg-3_5">
+            <a href="{{.Url}}">
+               <h6>{{.Text}}</h6>
+            </a>
+            <hr class="text-subline">
+            <ul class="menu-level-3">
+               {{range .Items}}
+               <li><a href="{{.Url}}">{{.Text}}</a></li>
+               {{end}}
+            </ul>
+         </div>
+         {{end}}
+      </div>
+   </div>
+</li>
+{{end}}
+
