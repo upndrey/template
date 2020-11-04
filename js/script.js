@@ -1485,17 +1485,91 @@ function onLoadHandler() {
           */
       });
   }
-
-  var pagination = document.querySelector(".pagination");
-  if(pagination) {
-      let currentPage = pagination.querySelector(".current");
-      pagination.childNodes.forEach(function (elem) {
-        if(elem.nodeName === "a") {
-          // todo
-        }
-      });
-  }
   /* ----- /Sort by ----- */
 
+
+  /* ----- Pagination ----- */
+  var pagination = document.querySelector(".pagination");
+  if(pagination) {
+      var pag1 = document.getElementById("pag1");
+      var pag2 = document.getElementById("pag2");
+      var pag3 = document.getElementById("pag3");
+      var pag4 = document.getElementById("pag4");
+      var pag5 = document.getElementById("pag5");
+      var prevPage = document.getElementById("prevPage");
+      var nextPage = document.getElementById("nextPage");
+      var firstPage = document.getElementById("firstPage");
+      var lastPage = document.getElementById("lastPage");
+      var maxpage = pagination.dataset.maxpage;
+
+      var temp = parseInt(pag3.innerText);
+      if(temp > 1) {
+          firstPage.href = "?page=1";
+          firstPage.classList.remove("displaynone");
+      }
+      else {
+          firstPage.classList.add("displaynone");
+      }
+
+      temp = parseInt(pag3.innerText) - 2;
+      if(temp >= 1) {
+          pag1.innerText = temp + "";
+          pag1.href = "?page=" + temp;
+          pag1.classList.remove("displaynone");
+      }
+      else {
+          pag1.classList.add("displaynone");
+      }
+      temp = parseInt(pag3.innerText) - 1;
+      if(temp >= 1) {
+          pag2.innerText = temp + "";
+          pag2.href = "?page=" + temp;
+          pag2.classList.remove("displaynone");
+      }
+      else {
+          pag2.classList.add("displaynone");
+      }
+      if(temp >= 1) {
+          prevPage.href = "?page=" + temp;
+          prevPage.classList.remove("displaynone");
+      }
+      else {
+          prevPage.classList.add("displaynone");
+      }
+      temp = parseInt(pag3.innerText) + 1;
+      if(temp <= maxpage) {
+          pag4.innerText = temp + "";
+          pag4.href = "?page=" + temp;
+          pag4.classList.remove("displaynone");
+      }
+      else {
+          pag4.classList.add("displaynone");
+      }
+      if(temp <= maxpage) {
+          nextPage.href = "?page=" + temp;
+          nextPage.classList.remove("displaynone");
+      }
+      else {
+          nextPage.classList.add("displaynone");
+      }
+      temp = parseInt(pag3.innerText) + 2;
+      if(temp <= maxpage) {
+          pag5.innerText = temp + "";
+          pag5.href = "?page=" + temp;
+          pag5.classList.remove("displaynone");
+      }
+      else {
+          pag5.classList.add("displaynone");
+      }
+      temp = parseInt(pag3.innerText);
+      if(temp < maxpage) {
+          lastPage.href = "?page=" + maxpage;
+          lastPage.classList.remove("displaynone");
+      }
+      else {
+          lastPage.classList.add("displaynone");
+      }
+  }
+  /* ----- /Pagination ----- */
 }
 
