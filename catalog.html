@@ -80,9 +80,9 @@
               <div class="form-group row"> 
                 <div class="input-group">
                   <span>Поиск по товару:</span>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="searchInput">
                     <span class="input-group-addon">
-                      <button type="submit"><i class="material-icons">search</i></button>  
+                      <button type="submit" id="searchButton"><i class="material-icons">search</i></button>
                     </span>
                 </div>
               </div>
@@ -309,10 +309,9 @@
 
                 <div class="row">
                   <div class="view_more pagination" data-maxpage='{{.Lastpage}}'>
-                    <a href="#" id="firstPage">&lt;&lt;</a> <a href="#" id="prevPage">&lt;</a> <a href="?page=1" class="displaynone" id="pag1">1</a> <a href="?page=2" class="displaynone" id="pag2">2</a> <a href="?page={{.Currentpage}}" class="current" id="pag3">{{.Currentpage}}</a> <a href="?page=4" id="pag4">4</a> <a href='?page=5' id="pag5">5</a> <a href="#" id="nextPage">&gt;</a> <a href="#" id="lastPage">&gt;&gt;</a>
+                    <a href="javascript:;" data-href="#" id="firstPage">&lt;&lt;</a> <a href="javascript:;" data-href="#" id="prevPage">&lt;</a> <a href="javascript:;" data-href="?page=1" class="displaynone" id="pag1">1</a> <a href="javascript:;" data-href="?page=2" class="displaynone" id="pag2">2</a> <a href="javascript:;" data-href="?page={{.Currentpage}}" class="current" id="pag3">{{.Currentpage}}</a> <a href="javascript:;" data-href="?page=4" id="pag4">4</a> <a href="javascript:;" data-href='?page=5' id="pag5">5</a> <a href="javascript:;" data-href="#" id="nextPage">&gt;</a> <a href="javascript:;" data-href="#" id="lastPage">&gt;&gt;</a>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

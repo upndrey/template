@@ -1404,23 +1404,13 @@ function onLoadHandler() {
     event.stopPropagation();
   });
   /* ----- /Modal window ----- */
-
-  // BACKEND CONNECTION
+  /* ________ BACKEND ________  */
+    
   function setCorrectSortType() {
       var url = window.location.href;
       var pos1 = url.indexOf("filtertype");
-      console.log(url, pos1);
-      if(pos1 !== -1) {
-          var pos2 = url.indexOf("=", pos1) + 1;
-          var pos3 = url.indexOf("&", pos1);
-          var value = "";
-          if(pos3 !== -1) {
-            value = url.substr(pos2, pos3);
-          }
-          else {
-            value = url.substr(pos2);
-          }
-          console.log(value);
+      var value = urlParser("filtertype");
+      if(value) {
           var select = document.getElementById("sel1");
           select.value = value;
           switch(value) {
@@ -1440,6 +1430,56 @@ function onLoadHandler() {
       }
   }
   setCorrectSortType();
+
+  function urlParser(paramType) {
+    var temp = window.location.href.split('?');
+    var base = temp[0];
+    var params;
+    if(temp[1])
+        params = temp[1].split('&');
+    else
+        params = [];
+
+    params = params.map(function (elem) {
+        return elem.split('=');
+    });
+    var result = null;
+    params.forEach(function (elem) {
+        if(elem[0] === paramType)
+          result = elem[1];
+    });
+    return result;
+  }
+  
+  function urlEditor(paramType, paramValue) {
+    var temp = window.location.href.split('?');
+    var base = temp[0];
+    var params;
+    if(temp[1])
+        params = temp[1].split('&');
+    else
+        params = [];
+    var noParamFlag = 1;
+    params = params.map(function (elem) {
+        elem = elem.split('=');
+        if(elem[0] === paramType) {
+            elem[1] = paramValue;
+            noParamFlag = 0;
+        }
+        return elem;
+    });
+    if(noParamFlag && paramValue !== "") {
+        params.push([paramType, paramValue]);
+    }
+
+    params = params.map(function (elem) {
+      return elem.join("=");
+    });
+    params = params.join("&");
+    url = `${base}?${params}`;
+    window.location.href = url;
+  }
+  
   /* ----- Sort by ----- */
   var select = document.getElementById("sel1");
   if(select) {
@@ -1459,35 +1499,10 @@ function onLoadHandler() {
                   correctName = "price";
                   break;
           }
-          var url = window.location.href;
-          if(window.location.href.indexOf("?") === -1) {
-              url = `${window.location.href}?filtertype=${correctName}`;
-          }
-          else {
-              var pos1 = url.indexOf("filtertype");
-              if(pos1 !== -1) {
-                  var pos2 = url.indexOf("&", pos1);
-                  if(pos2 !== -1) {
-                      url = url.slice(0, pos1) + url.slice(pos2);
-                  }
-                  url = url.slice(0, pos1);
-              }
-              if(url[pos1-1] === "&")
-                  pos1 = pos1-1;
-              url = `${url}&filtertype=${correctName}`;
-          }
-          console.log(window.location.href.indexOf("?"), url);
-          window.location.href = url;
-          /*
-          var promise = fetch(url, {
-              method: 'GET'
-          })
-          */
+          urlEditor("filtertype", correctName);
       });
   }
   /* ----- /Sort by ----- */
-
-
   /* ----- Pagination ----- */
   var pagination = document.querySelector(".pagination");
   if(pagination) {
@@ -1504,7 +1519,7 @@ function onLoadHandler() {
 
       var temp = parseInt(pag3.innerText);
       if(temp > 1) {
-          firstPage.href = "?page=1";
+          firstPage.dataset.href = "?page=1";
           firstPage.classList.remove("displaynone");
       }
       else {
@@ -1514,7 +1529,7 @@ function onLoadHandler() {
       temp = parseInt(pag3.innerText) - 2;
       if(temp >= 1) {
           pag1.innerText = temp + "";
-          pag1.href = "?page=" + temp;
+          pag1.dataset.href = "?page=" + temp;
           pag1.classList.remove("displaynone");
       }
       else {
@@ -1523,14 +1538,14 @@ function onLoadHandler() {
       temp = parseInt(pag3.innerText) - 1;
       if(temp >= 1) {
           pag2.innerText = temp + "";
-          pag2.href = "?page=" + temp;
+          pag2.dataset.href = "?page=" + temp;
           pag2.classList.remove("displaynone");
       }
       else {
           pag2.classList.add("displaynone");
       }
       if(temp >= 1) {
-          prevPage.href = "?page=" + temp;
+          prevPage.dataset.href = "?page=" + temp;
           prevPage.classList.remove("displaynone");
       }
       else {
@@ -1539,14 +1554,14 @@ function onLoadHandler() {
       temp = parseInt(pag3.innerText) + 1;
       if(temp <= maxpage) {
           pag4.innerText = temp + "";
-          pag4.href = "?page=" + temp;
+          pag4.dataset.href = "?page=" + temp;
           pag4.classList.remove("displaynone");
       }
       else {
           pag4.classList.add("displaynone");
       }
       if(temp <= maxpage) {
-          nextPage.href = "?page=" + temp;
+          nextPage.dataset.href = "?page=" + temp;
           nextPage.classList.remove("displaynone");
       }
       else {
@@ -1555,7 +1570,7 @@ function onLoadHandler() {
       temp = parseInt(pag3.innerText) + 2;
       if(temp <= maxpage) {
           pag5.innerText = temp + "";
-          pag5.href = "?page=" + temp;
+          pag5.dataset.href = "?page=" + temp;
           pag5.classList.remove("displaynone");
       }
       else {
@@ -1563,13 +1578,40 @@ function onLoadHandler() {
       }
       temp = parseInt(pag3.innerText);
       if(temp < maxpage) {
-          lastPage.href = "?page=" + maxpage;
+          lastPage.dataset.href = "?page=" + maxpage;
           lastPage.classList.remove("displaynone");
       }
       else {
           lastPage.classList.add("displaynone");
       }
+
+      var aList = pagination.querySelectorAll("a");
+      aList.forEach(function (a) {
+        a.addEventListener("click", function (e) {
+          var temp = a.dataset.href.split("=");
+          urlEditor("page", temp[1]);
+        })
+      });
+
   }
   /* ----- /Pagination ----- */
+  /* ----- Search ---- */
+    var searchButton = document.getElementById("searchButton");
+    searchButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      var searchInput = document.getElementById("searchInput");
+      var encoded = encodeURIComponent(searchInput.value);
+      urlEditor("search", encoded);
+    });
+
+    var searchInput = document.getElementById("searchInput");
+    if(searchInput) {
+      var value = urlParser("search");
+      if(value)
+        searchInput.value = decodeURIComponent(value);
+    }
+  /* ----- /Search ---- */
+
+  /* ________ /BACKEND ________  */
 }
 
