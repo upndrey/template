@@ -1503,6 +1503,7 @@ function onLoadHandler() {
       });
   }
   /* ----- /Sort by ----- */
+
   /* ----- Pagination ----- */
   var pagination = document.querySelector(".pagination");
   if(pagination) {
@@ -1592,23 +1593,25 @@ function onLoadHandler() {
           urlEditor("page", temp[1]);
         })
       });
-
   }
   /* ----- /Pagination ----- */
+
   /* ----- Search ---- */
     var searchButton = document.getElementById("searchButton");
-    searchButton.addEventListener("click", function (e) {
-      e.preventDefault();
-      var searchInput = document.getElementById("searchInput");
-      var encoded = encodeURIComponent(searchInput.value);
-      urlEditor("search", encoded);
-    });
+    if(searchButton) {
+        searchButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            var searchInput = document.getElementById("searchInput");
+            var encoded = encodeURIComponent(searchInput.value);
+            urlEditor("search", encoded);
+        });
 
-    var searchInput = document.getElementById("searchInput");
-    if(searchInput) {
-      var value = urlParser("search");
-      if(value)
-        searchInput.value = decodeURIComponent(value);
+        var searchInput = document.getElementById("searchInput");
+        if(searchInput) {
+            var value = urlParser("search");
+            if(value)
+                searchInput.value = decodeURIComponent(value);
+        }
     }
   /* ----- /Search ---- */
 

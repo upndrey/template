@@ -12,7 +12,7 @@
                               </span>
                            </div>
                            <div class="item-price">
-                              <p>{{.Price}} ₽</p>
+                              <p>{{if not (eq .OldPrice "0")}}<span class="old-price">{{.OldPrice}} ₽</span>{{end}}{{.Price}} ₽</p>
                            </div>
                            <button class="buy-button btn btn-small btn-primary" data-product_id="{{.Id}}">Купить</button>
                            <div class="in-cart">

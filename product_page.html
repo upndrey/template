@@ -1,0 +1,470 @@
+{{define "main"}}
+<main class="single-product">
+  <div class="container">
+    <div class="row">
+      <div class="product-title">
+        <h2>{{.Name}}</h2>
+        <span class="labels">{{if .Product.IsHit}}<div class="label-star filled big deg5">хит</div>{{end}} {{if .Product.IsNew}}<div class="label-star empty big deg5">new</div>{{end}}</span>
+      </div>
+      <div class="col-md-5 col-lg-7 product-img">
+        <img class="img-responsive" data-product_id="{{.Product.Code}}" src="{{.Product.Image}}">
+      </div>
+      <div class="col-md-7 col-lg-5 product-details">
+        <div class="product-price">
+          Цена: {{if .Product.OldPrice}}<span class="old_price">{{.Product.OldPriceStr}} ₽</span>{{end}} <span class="new_price">{{.Product.PriceStr}} ₽</span>
+        </div>
+        <div class="buy-button-wrap">
+          <button class="buy-button btn btn-big btn-primary" data-product_id="{{.Product.Code}}">купить</button>
+          <div class="in-cart"><div class="items-number">0</div><i class="material-icons">shopping_cart</i></div>
+        </div>
+        <div class="notavailable-button-wrap">
+          <button class="notavailable-button btn btn-big btn-tertiary btn-notavailable">нет в наличии</button>
+        </div>
+        <div class="fav-button-wrap">
+          <button class="fav-button btn btn-big btn-secondary" data-product_id="{{.Product.Code}}"><span class="to-add-text">Добавить в избранное</span><span class="added-text">В избранном</span><span class="to-del-text">Убрать из избранного</span></button>
+          <div class="in-fav"><i class="material-icons">favorite</i></div>
+        </div>
+        <div class="informme-button-wrap">
+          <button class="informme-button btn btn-big btn-secondary" data-product_id="{{.Product.Code}}"><span class="to-add-text">Сообщить о поступлении</span><span class="added-text">О поступлении сообщим</span><span class="to-del-text">Не сообщать о поступлении</span></button>
+          <div class="in-informme"><i class="material-icons">information</i></div>
+        </div>
+        <div class="row product-code">
+          <div class="col-md-3">
+            <h5>Код товара:</h5>
+          </div>
+          <div class="col-md-9 product-sku">
+            {{.Product.Code}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <h5>Рейтинг:</h5>
+          </div>
+          <div class="col-md-9 product-rating">
+            <ul>
+              <li><i class="material-icons color-primary">star_rate</i></li>
+              <li><i class="material-icons color-primary">star_rate</i></li>
+              <li><i class="material-icons color-primary">star_rate</i></li>
+              <li><i class="material-icons color-secondary">star_rate</i></li>
+              <li><i class="material-icons color-secondary">star_rate</i></li>
+            </ul>
+            <span>(5)</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <h5>Поделиться:</h5>
+          </div>
+          <div class="col-md-9 product-rating">
+            <ul class="social-icons">
+              <li><a class="icon fa fa-vk icon-xxs icon-circle icon-gray-light" target="_blank" href="https://vk.com/sakwa"></a></li>
+              <li><a class="icon fa fa-facebook icon-xxs icon-circle icon-gray-light" target="_blank" href="https://www.facebook.com/groups/sakwa1"></a></li>
+              <li><a class="icon fa fa-odnoklassniki icon-xxs icon-circle icon-gray-light" target="_blank" href="https://www.odnoklassniki.ru/sakwa.ru"></a></li>
+              <li><a class="icon fa fa-youtube icon-xxs icon-circle icon-gray-light" target="_blank" href="https://www.youtube.com/user/1sakwa"></a></li>
+              <li><a class="icon fa fa-instagram icon-xxs icon-circle icon-gray-light" target="_blank" href="https://www.instagram.com/sakwa.ru/"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="container single-product-tabs">
+    <div id="tabs" class="tabs">
+      <div class="tab">
+        <input type="radio" name="link" id="sp1" checked="checked">
+        <label for="sp1">Описание</label>
+        <div class="tab-content product-description-tab">
+          <p>{{.Product.Description}}</p>
+        </div>
+      </div>
+      <div class="tab">
+        <input type="radio" name="link" id="sp2">
+        <label for="sp2">Комментарии</label>
+        <div class="tab-content comments-tab">
+          <div class="comments-count">
+            <p>2 Комментария</p>
+          </div>
+          <div class="reply-block">
+            <form>
+              <div class="author-name hidden-sm">
+                Светлана
+              </div>
+              <div class="row">
+                <div class="col-md-1 author-photo hidden-sm">
+                  <!-- <img src="../images/author-photo2.png"> -->
+                  <span class="icon icon-xs icon-circle icon-gray-lighter mdi mdi-account color-primary"></span>
+                </div>
+                <div class="col-md-11 reply-form">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="comment" name="comment" placeholder="Присоединиться к обсуждению...">
+                  </div>
+                </div>
+              </div>
+              <div class="row comments-controls">
+                <div class="col-md-1 hidden-sm">
+                </div>
+                <div class="col-md-7 product-rating vote">
+                  <h5>Проголосовать:</h5>
+                  <span>&nbsp;</span>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="rating_1" value="rating_1">
+                      <span class="cr"><i class="cr-icon material-icons">star_rate</i></span>
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="rating_2" value="rating_2">
+                      <span class="cr"><i class="cr-icon material-icons">star_rate</i></span>
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="rating_3" value="rating_3">
+                      <span class="cr"><i class="cr-icon material-icons">star_rate</i></span>
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="rating_4" value="rating_4">
+                      <span class="cr"><i class="cr-icon material-icons">star_rate</i></span>
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="rating_5" value="rating_5">
+                      <span class="cr"><i class="cr-icon material-icons">star_rate</i></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-4 send-button-wrap">
+                  <button class="btn btn-small btn-primary">Отправить</button>
+                </div>
+              </div>
+              <input type="hidden" name="product_id" value="{{.Product.Code}}" />
+            </form>
+            <div class="comment-block">
+              <div class="comment-head">
+                <span class="name">Марина</span>
+                <span class="comment-date">17.10.18</span>
+              </div>
+              <div class="comment-text">
+                Подскажите, будет ли пудра в наличии в этом месяце?
+              </div>
+              <div class="comment-foot">
+                <a href="#">Ответить</a>
+              </div>
+            </div>
+            <div class="comment-block reply-comment">
+              <div class="comment-head">
+                <span class="name">Владимир</span>
+                <span class="reply-icon"><i class="material-icons">reply</i></span>
+                <span class="reply-to">Марина</span>
+                <span class="comment-date">17.10.18</span>
+              </div>
+              <div class="comment-text">
+                Да, будет.
+              </div>
+              <div class="comment-foot">
+                <a href="#">Ответить</a>
+              </div>
+            </div>
+            <div class="comment-block">
+              <div class="comment-head">
+                <span class="name">Ольга</span>
+                <span class="comment-date">17.10.18</span>
+              </div>
+              <div class="comment-text">
+                Очень понравилась пудра, всем советую.
+              </div>
+              <div class="comment-foot">
+                <a href="#">Ответить</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab">
+        <input type="radio" name="link" id="sp3">
+        <label for="sp3">Видео</label>
+        <div class="tab-content video-tab">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Ce2cFkA8cC0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="tab">
+        <input type="radio" name="link" id="sp4">
+        <label for="sp4">Наличие в магазинах</label>
+        <div class="tab-content stores-tab">
+          <table>
+            <tr><th>Магазин</th><th>Кол-во</th></tr>
+            <tr>
+              <td>
+                <address class="contact-info">
+                  <div class="icon-block"><a href="contacts.html?shop=shop01"><span class="icon icon-xs mdi mdi-map-marker color-secondary"></span></a></div>
+                  <div class="info-block"><a href="contacts.html?shop=shop01">г.&nbsp;Барнаул, ул.&nbsp;Малахова,&nbsp;89</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-secondary"></span></div>
+                  <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-721-001">(3852)&nbsp;721-001</a>,<br />сот.:&nbsp;<a href="tel:+7-906-965-5252">+7-906-965-5252</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-calendar-clock color-secondary"></span></div>
+                  <div class="info-block">ежедневно<br />09:00 - 20:00</div>
+                </address>
+              </td>
+              <td>15</td>
+            </tr>
+            <tr>
+              <td>
+                <address class="contact-info">
+                  <div class="icon-block"><a href="contacts.html?shop=shop02"><span class="icon icon-xs mdi mdi-map-marker color-secondary"></span></a></div>
+                  <div class="info-block"><a href="contacts.html?shop=shop02">г.&nbsp;Барнаул, Павловский&nbsp;тр.,&nbsp;188, 1&nbsp;этаж</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-secondary"></span></div>
+                  <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-25-43-01">(3852)&nbsp;25-43-01</a>,<br />сот.:&nbsp;<a href="tel:+7-903-947-9301">+7-903-947-9301</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-calendar-clock color-secondary"></span></div>
+                  <div class="info-block">ежедневно<br />10:00 - 21:00</div>
+                </address>
+              </td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>
+                <address class="contact-info">
+                  <div class="icon-block"><a href="contacts.html?shop=shop03"><span class="icon icon-xs mdi mdi-map-marker color-secondary"></span></a></div>
+                  <div class="info-block"><a href="contacts.html?shop=shop03">г.&nbsp;Барнаул, пр.&nbsp;Строителей,&nbsp;117, 1&nbsp;этаж</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-secondary"></span></div>
+                  <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-53-49-84">(3852)&nbsp;53-49-84</a>,<br />сот.:&nbsp;<a href="tel:+7-964-603-4984">+7-964-603-4984</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-calendar-clock color-secondary"></span></div>
+                  <div class="info-block">ежедневно<br />10:00 - 22:00</div>
+                </address>
+              </td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>
+                <address class="contact-info">
+                  <div class="icon-block"><a href="contacts.html?shop=shop04"><span class="icon icon-xs mdi mdi-map-marker color-secondary"></span></a></div>
+                  <div class="info-block"><a href="contacts.html?shop=shop04">г.&nbsp;Барнаул, Павловский&nbsp;тр.,&nbsp;251-в, 1&nbsp;этаж</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-secondary"></span></div>
+                  <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-25-44-92">(3852)&nbsp;25-44-92</a>,<br />сот.:&nbsp;<a href="tel:+7-903-947-9492">+7-903-947-9492</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-calendar-clock color-secondary"></span></div>
+                  <div class="info-block">ежедневно<br />10:00 - 22:00</div>
+                </address>
+              </td>
+              <td>25</td>
+            </tr>
+            <tr>
+              <td>
+                <address class="contact-info">
+                  <div class="icon-block"><a href="contacts.html?shop=shop05"><span class="icon icon-xs mdi mdi-map-marker color-secondary"></span></a></div>
+                  <div class="info-block"><a href="contacts.html?shop=shop05">г.&nbsp;Барнаул, пр.&nbsp;Ленина,&nbsp;102в, 2&nbsp;этаж</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-secondary"></span></div>
+                  <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-69-44-94">(3852)&nbsp;69-44-94</a>,<br />сот.:&nbsp;<a href="tel:+7-902-998-4494">+7-902-998-4494</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-calendar-clock color-secondary"></span></div>
+                  <div class="info-block">ежедневно<br />10:00 - 22:00</div>
+                </address>
+              </td>
+              <td>35</td>
+            </tr>
+            <tr>
+              <td>
+                <address class="contact-info">
+                  <div class="icon-block"><a href="contacts.html?shop=shop06"><span class="icon icon-xs mdi mdi-map-marker color-secondary"></span></a></div>
+                  <div class="info-block"><a href="contacts.html?shop=shop06">г.&nbsp;Барнаул, ул.&nbsp;Балтийская,&nbsp;116</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-secondary"></span></div>
+                  <div class="info-block">тел.:&nbsp;<a href="tel:8-3852-25-20-28">(3852)&nbsp;25-20-28</a>,<br />сот.:&nbsp;<a href="tel:+7-903-947-7028">+7-903-947-7028</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-calendar-clock color-secondary"></span></div>
+                  <div class="info-block">ежедневно<br />10:00 - 21:00</div>
+                </address>
+              </td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>
+                <address class="contact-info">
+                  <div class="icon-block"><a href="contacts.html?shop=shop07"><span class="icon icon-xs mdi mdi-map-marker color-secondary"></span></a></div>
+                  <div class="info-block"><a href="contacts.html?shop=shop07">г.&nbsp;Новоалтайск, ул.&nbsp;Деповская,&nbsp;22, 2&nbsp;этаж</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-secondary"></span></div>
+                  <div class="info-block">сот.:&nbsp;<a href="tel:+7-960-965-6706">+7-960-965-6706</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-calendar-clock color-secondary"></span></div>
+                  <div class="info-block">ежедневно<br />10:00 - 21:00</div>
+                </address>
+              </td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>
+                <address class="contact-info">
+                  <div class="icon-block"><a href="contacts.html?shop=shop08"><span class="icon icon-xs mdi mdi-map-marker color-secondary"></span></a></div>
+                  <div class="info-block"><a href="contacts.html?shop=shop08">г.&nbsp;Бийск, ул.&nbsp;Васильева,&nbsp;1а, 2&nbsp;этаж</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-phone color-secondary"></span></div>
+                  <div class="info-block">тел.:&nbsp;<a href="tel:8-3854-222-223">(3854)&nbsp;222-223</a></div>
+                </address>
+                <address class="contact-info">
+                  <div class="icon-block"><span class="icon icon-xs mdi mdi-calendar-clock color-secondary"></span></div>
+                  <div class="info-block">ежедневно<br />10:00 - 20:00</div>
+                </address>
+              </td>
+              <td>1</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="catalog blocks">
+    <section class="related-products product-group">
+      <div class="container">
+        <h3>С этим товаром покупают</h3>
+        <hr class="color-secondary divider-custom" />
+        <div class="tabs">
+          <div class="tab">
+            <div class="tab-content">
+              <div class="row">
+
+                <!-- The goods -->
+                <div class="tab-item-wrap">
+                  <a href="product_page.html?product=product00011" class="tab-item" data-product_id="00011">
+                    <div class="item-title">
+                      Крем-бальзам - Архитектор волос для восстановления + питания 1000мл In...
+                    </div>
+                    <div class="item-image">
+                      <img src="../images/sample_product_square_156x156.jpg">
+                      <span class="labels"></span>
+                    </div>
+                    <div class="item-price">
+                      <p>15 000 ₽</p>
+                    </div>
+                    <button class="buy-button btn btn-small btn-primary" data-product_id="00011">Купить</button>
+                    <div class="in-cart"><div class="items-number">0</div><i class="material-icons">shopping_cart</i></div>
+                    <div class="item-hover-block">
+                      <button class="fav-button btn btn-small btn-secondary" data-product_id="00011"><span class="to-add-text">Добавить в избранное</span><span class="added-text">В избранном</span><span class="to-del-text">Убрать из избранного</span></button>
+                      <div class="in-fav"><i class="material-icons">favorite</i></div>
+                      <div class="item-description">Описание товара описание товара описание товара описание товара описание товара</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="tab-item-wrap">
+                  <a href="product_page.html?product=product00012" class="tab-item" data-product_id="00012">
+                    <div class="item-title">
+                      Крем-бальзам - Архитектор волос для восстановления + питания 1000мл In...
+                    </div>
+                    <div class="item-image">
+                      <img src="../images/sample_product_square_156x156.jpg">
+                      <span class="labels"><div class="label-star filled deg5">хит</div></span>
+                    </div>
+                    <div class="item-price">
+                      <p><span class="old-price">10 000 ₽</span>15 000 ₽</p>
+                    </div>
+                    <button class="buy-button btn btn-small btn-primary" data-product_id="00012">Купить</button>
+                    <div class="in-cart"><div class="items-number">0</div><i class="material-icons">shopping_cart</i></div>
+                    <div class="item-hover-block">
+                      <button class="fav-button btn btn-small btn-secondary" data-product_id="00012"><span class="to-add-text">Добавить в избранное</span><span class="added-text">В избранном</span><span class="to-del-text">Убрать из избранного</span></button>
+                      <div class="in-fav"><i class="material-icons">favorite</i></div>
+                      <div class="item-description">Описание товара описание товара описание товара описание товара описание товара</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="tab-item-wrap">
+                  <a href="product_page.html?product=product00013" class="tab-item" data-product_id="00013">
+                    <div class="item-title">
+                      Крем-бальзам - Архитектор волос для восстановления + питания 1000мл In...
+                    </div>
+                    <div class="item-image">
+                      <img src="../images/sample_product_square_156x156.jpg">
+                      <span class="labels"><div class="label-star filled deg5">хит</div> <div class="label-star empty deg5">new</div></span>
+                    </div>
+                    <div class="item-price">
+                      <p>15 000 ₽</p>
+                    </div>
+                    <button class="buy-button btn btn-small btn-primary" data-product_id="00013">Купить</button>
+                    <div class="in-cart"><div class="items-number">0</div><i class="material-icons">shopping_cart</i></div>
+                    <div class="item-hover-block">
+                      <button class="fav-button btn btn-small btn-secondary" data-product_id="00013"><span class="to-add-text">Добавить в избранное</span><span class="added-text">В избранном</span><span class="to-del-text">Убрать из избранного</span></button>
+                      <div class="in-fav"><i class="material-icons">favorite</i></div>
+                      <div class="item-description">Описание товара описание товара описание товара описание товара описание товара</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="tab-item-wrap">
+                  <a href="product_page.html?product=product00014" class="tab-item" data-product_id="00014">
+                    <div class="item-title">
+                      Крем-бальзам - Архитектор волос для восстановления + питания 1000мл In...
+                    </div>
+                    <div class="item-image">
+                      <img src="../images/sample_product_square_156x156.jpg">
+                      <span class="labels"><div class="label-star empty deg5">new</div></span>
+                    </div>
+                    <div class="item-price">
+                      <p><span class="old-price">10 000 ₽</span>15 000 ₽</p>
+                    </div>
+                    <button class="buy-button btn btn-small btn-primary" data-product_id="00014">Купить</button>
+                    <div class="in-cart"><div class="items-number">0</div><i class="material-icons">shopping_cart</i></div>
+                    <div class="item-hover-block">
+                      <button class="fav-button btn btn-small btn-secondary" data-product_id="00014"><span class="to-add-text">Добавить в избранное</span><span class="added-text">В избранном</span><span class="to-del-text">Убрать из избранного</span></button>
+                      <div class="in-fav"><i class="material-icons">favorite</i></div>
+                      <div class="item-description">Описание товара описание товара описание товара описание товара описание товара</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="tab-item-wrap">
+                  <a href="product_page.html?product=product00015" class="tab-item" data-product_id="00015">
+                    <div class="item-title">
+                      Крем-бальзам - Архитектор волос для восстановления + питания 1000мл In...
+                    </div>
+                    <div class="item-image">
+                      <img src="../images/sample_product_square_156x156.jpg">
+                      <span class="labels"></span>
+                    </div>
+                    <div class="item-price">
+                      <p>15 000 ₽</p>
+                    </div>
+                    <button class="buy-button btn btn-small btn-primary" data-product_id="00015">Купить</button>
+                    <div class="in-cart"><div class="items-number">0</div><i class="material-icons">shopping_cart</i></div>
+                    <div class="item-hover-block">
+                      <button class="fav-button btn btn-small btn-secondary" data-product_id="00015"><span class="to-add-text">Добавить в избранное</span><span class="added-text">В избранном</span><span class="to-del-text">Убрать из избранного</span></button>
+                      <div class="in-fav"><i class="material-icons">favorite</i></div>
+                      <div class="item-description">Описание товара описание товара описание товара описание товара описание товара</div>
+                    </div>
+                  </a>
+                </div>
+                <!-- /The goods -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+{{end}}
