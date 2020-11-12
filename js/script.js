@@ -1405,7 +1405,8 @@ function onLoadHandler() {
   });
   /* ----- /Modal window ----- */
   /* ________ BACKEND ________  */
-    
+
+  /* ----- Helpers ---- */
   function setCorrectSortType() {
       var url = window.location.href;
       var pos1 = url.indexOf("filtertype");
@@ -1479,6 +1480,61 @@ function onLoadHandler() {
     url = `${base}?${params}`;
     window.location.href = url;
   }
+
+  function getCookie(name) {
+      let matches = document.cookie.match(new RegExp(
+          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+      ));
+      return matches ? decodeURIComponent(matches[1]) : undefined;
+  }
+
+  function setCookie(name, value, options = {}) {
+
+      options = {
+          path: '/',
+          // при необходимости добавьте другие значения по умолчанию
+          ...options
+      };
+
+      if (options.expires instanceof Date) {
+          options.expires = options.expires.toUTCString();
+      }
+
+      let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+      for (let optionKey in options) {
+          updatedCookie += "; " + optionKey;
+          let optionValue = options[optionKey];
+          if (optionValue !== true) {
+              updatedCookie += "=" + optionValue;
+          }
+      }
+
+      document.cookie = updatedCookie;
+  }
+  /* ----- /Helpers ---- */
+
+  /* ----- Unauthorized ---- */
+  function initCookies() {
+    if(!getCookie("id")) {
+        const uid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+        document.cookie = `id=${uid}`;
+        setCookie("id", uid)
+    }
+    else {
+        const formData = new FormData();
+        formData.append('id', getCookie("id"));
+        var promise = fetch("http://localhost:8080/api/cart", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(formData)
+        });
+    }
+  }
+    initCookies();
+  /* ----- /Unauthorized ---- */
   
   /* ----- Sort by ----- */
   var select = document.getElementById("sel1");
@@ -1503,7 +1559,6 @@ function onLoadHandler() {
       });
   }
   /* ----- /Sort by ----- */
-
   /* ----- Pagination ----- */
   var pagination = document.querySelector(".pagination");
   if(pagination) {
@@ -1595,25 +1650,44 @@ function onLoadHandler() {
       });
   }
   /* ----- /Pagination ----- */
-
   /* ----- Search ---- */
     var searchButton = document.getElementById("searchButton");
     if(searchButton) {
-        searchButton.addEventListener("click", function (e) {
-            e.preventDefault();
-            var searchInput = document.getElementById("searchInput");
-            var encoded = encodeURIComponent(searchInput.value);
-            urlEditor("search", encoded);
-        });
-
+      searchButton.addEventListener("click", function (e) {
+        e.preventDefault();
         var searchInput = document.getElementById("searchInput");
-        if(searchInput) {
-            var value = urlParser("search");
-            if(value)
-                searchInput.value = decodeURIComponent(value);
-        }
+        var encoded = encodeURIComponent(searchInput.value);
+        urlEditor("search", encoded);
+      });
+
+      var searchInput = document.getElementById("searchInput");
+      if(searchInput) {
+        var value = urlParser("search");
+        if(value)
+          searchInput.value = decodeURIComponent(value);
+      }
     }
   /* ----- /Search ---- */
+  /* ----- Cart ---- */
+  var buyButtonCatalog = document.querySelectorAll(".buy-button");
+  buyButtonCatalog.forEach(function (elem) {
+      elem.addEventListener("click", function () {
+        let obj = {
+          id: getCookie("id")
+        };
+        var promise = fetch("http://localhost:8080/api/cart", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(obj)
+        });
+        promise.then(function (data) {
+            console.log("ANSWER",data);
+        })
+      });
+  });
+  /* ----- /Cart ---- */
 
   /* ________ /BACKEND ________  */
 }
